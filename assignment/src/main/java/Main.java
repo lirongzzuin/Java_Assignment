@@ -80,10 +80,9 @@ class Taxi {
 
     public String getTaxiStateStr(){
         if (fuel < 10 && passenger<1) {
-            state = "waiting for gas station";
+            state = "out of service";
         } if (fuel < 10 && passenger>= 1){
             state = "going to gas station";
-            System.out.println("Out of Service");
         } if (fuel>=10 && passenger>=1) {
             state = "Running";
         } else if(fuel>=10 && passenger<1){
@@ -97,11 +96,12 @@ class Taxi {
             passenger++;
             System.out.println("Where can I take you??");
         } else {
-            System.out.println("get out!");
+            System.out.println("Out of Service. Get away from here!");
         }
     }
 
     public void speedUp(int changeSpeed){
+        getTaxiStateStr();
         if (state.equals("Running")) {
             speed += changeSpeed;
         } else {
@@ -110,6 +110,7 @@ class Taxi {
     }
 
     public void speedDown(int changeSpeed) {
+        getTaxiStateStr();
         if (state.equals("Running")) {
             speed -= changeSpeed;
         } else {
@@ -127,6 +128,12 @@ class Taxi {
         setDistance();
         totalFee = fee + (totalDistance - distance)*750;
         return totalFee;
+    }
+    public void pay(){
+        cost();
+        if (state.equals("Running")) {
+            System.out.println("Alright. Total " + cost() + "KRW. You better pay as quick as possible... I'm not kidding.");
+        }
     }
 
     public void start() {
@@ -147,10 +154,13 @@ public class Main {
 
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-        Taxi taxi = new Taxi("Taxi99", 0, 30, 70, "GangNam", 10);
+        Taxi taxi = new Taxi("Taxi99", 0, 10, 70, "GangNam", 10);
         taxi.start();
         taxi.takePassenger();
-        System.out.println(taxi.name + " is " + taxi.getTaxiStateStr() + " and " + taxi.fuel + "% of fuel is remaining" + ", " + "# of passengers are " + taxi.passenger + ", and "
-                + taxi.speed +"km/hr and our destination is " + taxi.destination + " , total distance and fee to destination would be " + taxi.totalDistance + "km and " + taxi.cost() + "KRW.");
+//        taxi.speedUp(10);
+//        taxi.speedDown(5);
+        System.out.println(taxi.name + " is " + taxi.getTaxiStateStr() + ", " + taxi.fuel + "% of fuel is remaining" + " and " + "# of passengers are " + taxi.passenger + ", speed of this taxi is "
+                + taxi.speed +"km/hr and heading to " + taxi.destination + " , total distance and fee to destination would be " + taxi.totalDistance + "km and " + taxi.cost() + "KRW.");
+        taxi.pay();
     }
 }
