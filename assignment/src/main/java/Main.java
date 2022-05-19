@@ -52,7 +52,7 @@ class Bus {
     }
 
     public void start() {
-        System.out.println("Let get it started!!");
+        System.out.println("Let's get it started!!");
     }
 }
 class Taxi {
@@ -95,7 +95,7 @@ class Taxi {
         getTaxiStateStr();
         if(state.equals("Waiting")) {
             passenger++;
-            System.out.println(passenger);
+            System.out.println("Where can I take you??");
         } else {
             System.out.println("get out!");
         }
@@ -130,26 +130,27 @@ class Taxi {
     }
 
     public void start() {
-        System.out.println("Let get it started!!");
+        System.out.println("Let's get it started!!");
     }
 }
 
 
 public class Main {
     public static void main(String[] args) {
-//        Bus bus = new Bus(25, 20, "BUS1122", 1500,10, 30);
-//        bus.start();
-//        bus.takePassenger();
-////        bus.speedUp();
-////        bus.speedDown();
-//        System.out.println(bus.num + " is " + bus.getBusStateStr() + " and " + " # of passenger is " + bus.currentPassenger + " , " + bus.fuel +
-//                "% of fuel is remaining." + " fee of this bus is " + bus.fee + "KRW and current speed is " + bus.speed +"km/hr.");
+        Bus bus = new Bus(25, 20, "BUS1122", 1500,10, 30);
+        bus.start();
+        bus.takePassenger();
+//        bus.speedUp();
+//        bus.speedDown();
+        System.out.println(bus.num + " is " + bus.getBusStateStr() + " and " + " # of passenger is " + bus.currentPassenger + " , " + bus.fuel +
+                "% of fuel is remaining." + " fee of this bus is " + bus.fee + "KRW and current speed is " + bus.speed +"km/hr.");
 
-        Taxi taxi = new Taxi("Taxi99", 0, 15, 70, "GangNam", 8);
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
+        Taxi taxi = new Taxi("Taxi99", 0, 30, 70, "GangNam", 10);
         taxi.start();
         taxi.takePassenger();
-        System.out.println(taxi.name + " is " + taxi.getTaxiStateStr() + " and " + taxi.fuel + "% of fuel is remaining" + ", " + "the speed of this taxi is " +
-                taxi.speed +"km/hr and our destination is " + taxi.destination + " , total distance and fee to destination would be " + taxi.totalDistance + "km and "
-                + taxi.cost() + "KRW.");
+        System.out.println(taxi.name + " is " + taxi.getTaxiStateStr() + " and " + taxi.fuel + "% of fuel is remaining" + ", " + "# of passengers are " + taxi.passenger + ", and "
+                + taxi.speed +"km/hr and our destination is " + taxi.destination + " , total distance and fee to destination would be " + taxi.totalDistance + "km and " + taxi.cost() + "KRW.");
     }
 }
